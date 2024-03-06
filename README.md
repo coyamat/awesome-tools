@@ -18,6 +18,7 @@ brew install \
   raycast \
   visual-studio-code \
   meetingbar \
+  podman-desktop \
   ;
 ```
 
