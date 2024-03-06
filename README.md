@@ -25,6 +25,10 @@ brew install \
 
 ```
 brew install \
+  coreutils \
+  gawk \
+  gnu-sed \
+  grep \
   nodenv \
   peco \
   ghq \
