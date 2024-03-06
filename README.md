@@ -36,6 +36,7 @@ brew install \
   pyenv \
   gh \
   jq \
+  glow \
   ;
 ```
 
