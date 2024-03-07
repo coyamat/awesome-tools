@@ -18,6 +18,7 @@ brew install \
   raycast \
   visual-studio-code \
   meetingbar \
+  podman-desktop \
   ;
 ```
 
@@ -36,12 +37,14 @@ brew install \
   pyenv \
   gh \
   jq \
+  glow \
   ;
 ```
 
 ## Other Tools
 
 - [seachicken/gh-poi: ✨ Safely clean up your local branches](https://github.com/seachicken/gh-poi)
+- [macOSのメニューバーのアイコンを非表示にするアプリ #macOS - Qiita](https://qiita.com/tomoyk/items/8e6113b06b6f385c71f8)
 
 ## Zshrc
 
