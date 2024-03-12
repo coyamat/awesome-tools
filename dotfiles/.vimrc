@@ -24,9 +24,9 @@ set ignorecase        " 大文字小文字の区別なし
 syntax on
 au BufRead,BufNewFile *.tf set filetype=hcl
 
-# Installation::
-# mkdir -p ~/.vim/syntax
-# curl -o ~/.vim/syntax/hcl.vim https://raw.githubusercontent.com/hashivim/vim-terraform/master/syntax/hcl.vim
+" Installation::
+" mkdir -p ~/.vim/syntax
+" curl -o ~/.vim/syntax/hcl.vim https://raw.githubusercontent.com/hashivim/vim-terraform/master/syntax/hcl.vim
 
 
 " HJKL on insert mode
