@@ -283,23 +283,10 @@ fzf-cd() {
 zle -N fzf-cd-widget fzf-cd
 bindkey '^G' fzf-cd-widget
 
-# fzf-cdr 
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook 
-add-zsh-hook chpwd chpwd_recent_dirs
-function fzf-cdr() {
-    target_dir=`cdr -l | sed 's/^[^ ][^ ]*  *//' | fzf`
-    target_dir=`echo ${target_dir/\~/$HOME}`
-    if [ -n "$target_dir" ]; then
-        cd $target_dir
-    fi
-}
-zle -N fzf-cdr
-bindkey '^G' fzf-cdr
-
 # fzf-vim
 fzf_vim_edit() {
     local file
-    file=$(fzf --preview="bat --color=always --style=header,grid --line-range :40 {}" --preview-window=right:60%:wrap)
+    file=$(fzf --reverse --preview="bat --color=always --style=header,grid --line-range :40 {}" --preview-window=right:60%:wrap)
     if [ -n "$file" ]; then
         vim "$file"
     fi
@@ -307,15 +294,22 @@ fzf_vim_edit() {
 alias v='fzf_vim_edit'
 
 # fzf-git-branch
-function fzf_co() {
+function fzf-co() {
   git checkout $(git branch -a | \
     tr -d " " | \
     fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | \
     head -n 1 | sed -e "s/^\*\s*//g" | \
     perl -pe "s/remotes\/origin\///g")
 }
-zle -N fzf_co
-bindkey '^B' fzf_co
+zle -N fzf-co
+bindkey '^B' fzf-co
+
+# fzf-git-show
+function fzf-git-show {
+    git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort --preview "git show --color=always {1} | less -R" --preview-window=:wrap --bind "enter:execute: (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % git show --color=always % | less -R)"
+}
+alias glog='fzf-git-show'
 
 # zoxide-cd
 zle -N zi
