@@ -38,6 +38,7 @@ brew install \
   gh \
   jq \
   glow \
+  bcat \
   ;
 ```
 
@@ -48,7 +49,7 @@ brew install \
 
 ## Zshrc
 
-[tomoyk/.zshrc](https://gist.github.com/tomoyk/79f5228d5aa9b24266e58353d1fca616)
+[.zshrc](dotfiles/.zshrc)
 
 ```
 brew install zsh-autosuggestions
