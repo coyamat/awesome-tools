@@ -41,6 +41,7 @@ brew install \
   bat \
   fzf \
   htop \
+  cloudflared \
   ;
 ```
 
