@@ -40,6 +40,7 @@ brew install \
   glow \
   bat \
   fzf \
+  htop \
   ;
 ```
 
