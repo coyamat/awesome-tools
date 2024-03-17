@@ -7,3 +7,4 @@ email = xxx@koyama.me
 	st = status
 	br = branch
 	ch = checkout
+	re = reset
