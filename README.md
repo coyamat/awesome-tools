@@ -50,8 +50,6 @@ brew install \
 
 ## Zshrc
 
-[.zshrc](dotfiles/.zshrc)
-
 ```
 brew install zsh-autosuggestions
 ```
