@@ -8,7 +8,7 @@ set showmatch         " カッコの対応付
 set number            " 行番号を表示
 set ruler             " カーソル位置の行, 列を表示
 set cursorline        " 現在の行を強調表示
-set visualbell        " ベルの代わりに画面点滅
+" set visualbell        " ベルの代わりに画面点滅
 set title             " 編集中のファイル名を表示
 
 " 追加設定
