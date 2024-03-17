@@ -38,7 +38,8 @@ brew install \
   gh \
   jq \
   glow \
-  bcat \
+  bat \
+  fzf \
   ;
 ```
 
