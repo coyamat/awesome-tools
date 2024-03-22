@@ -24,6 +24,8 @@ brew install \
 
 ## CLI Tools
 
+Required:
+
 ```
 brew install \
   coreutils \
@@ -42,6 +44,14 @@ brew install \
   fzf \
   htop \
   cloudflared \
+  ;
+```
+
+Optional:
+
+```
+brew install \
+  awscli \
   ;
 ```
 
