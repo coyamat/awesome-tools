@@ -43,6 +43,7 @@ brew install \
   bat \
   fzf \
   htop \
+  ynqa/tap/jnv \
   ;
 ```
 
