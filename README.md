@@ -43,7 +43,6 @@ brew install \
   bat \
   fzf \
   htop \
-  cloudflared \
   ;
 ```
 
@@ -52,6 +51,8 @@ Optional:
 ```
 brew install \
   awscli \
+  google-cloud-sdk \
+  cloudflared \
   ;
 ```
 
