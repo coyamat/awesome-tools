@@ -318,7 +318,3 @@ bindkey '^z' zi
 # source ~/.zshrc_1password
 
 alias glow='glow -p'
-
-# gcloud cli
-source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
