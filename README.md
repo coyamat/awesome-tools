@@ -24,6 +24,8 @@ brew install \
 
 ## CLI Tools
 
+Required:
+
 ```
 brew install \
   coreutils \
@@ -41,6 +43,15 @@ brew install \
   bat \
   fzf \
   htop \
+  ;
+```
+
+Optional:
+
+```
+brew install \
+  awscli \
+  google-cloud-sdk \
   cloudflared \
   ag \
   ;
