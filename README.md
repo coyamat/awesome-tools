@@ -14,7 +14,7 @@ https://brew.sh/
 
 ```
 brew install \
-  item \
+  iterm \
   raycast \
   visual-studio-code \
   meetingbar \
@@ -43,6 +43,7 @@ brew install \
   bat \
   fzf \
   htop \
+  ag \
   ;
 ```
 
@@ -53,7 +54,6 @@ brew install \
   awscli \
   google-cloud-sdk \
   cloudflared \
-  ag \
   ;
 ```
 
