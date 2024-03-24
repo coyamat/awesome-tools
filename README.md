@@ -42,6 +42,7 @@ brew install \
   fzf \
   htop \
   cloudflared \
+  ag \
   ;
 ```
 
