@@ -37,6 +37,7 @@ brew install \
   peco \
   ghq \
   kubectl \
+  kubectx
   pyenv \
   gh \
   jq \
