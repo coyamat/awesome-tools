@@ -32,6 +32,7 @@ brew install \
   gawk \
   gnu-sed \
   grep \
+  make \
   nodenv \
   peco \
   ghq \
