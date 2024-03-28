@@ -315,6 +315,6 @@ alias glog='fzf-git-show'
 zle -N zi
 bindkey '^z' zi
 
-# source ~/.zshrc_1password
+source ~/.zshrc_1password
 
 alias glow='glow -p'

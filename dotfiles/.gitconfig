@@ -1,9 +1,8 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
-name = Tomoyuki KOYAMA
-email = xxx@koyama.me
+    name = Tomoyuki KOYAMA
+    email = __REPLACE_ME_
 [alias]
+    tree = log --graph --pretty=format:'%x09%C(auto) %h %Cgreen %ar %Creset%x09by"%C(cyan ul)%an%Creset" %x09%C(auto)%s %d'
 	st = status
 	br = branch
 	ch = checkout
