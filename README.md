@@ -19,6 +19,7 @@ brew install \
   visual-studio-code \
   meetingbar \
   podman-desktop \
+  alt-tab \
   ;
 ```
 
