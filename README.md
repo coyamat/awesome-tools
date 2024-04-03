@@ -58,6 +58,7 @@ brew install \
   awscli \
   google-cloud-sdk \
   cloudflared \
+  bitwarden-cli \
   ;
 ```
 
