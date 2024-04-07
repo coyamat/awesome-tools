@@ -25,3 +25,8 @@ $ sudo sed -i.bak -e "s%http://jp.archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac
 
 [apt-getの利用リポジトリを日本サーバーに変更する #Ubuntu - Qiita](https://qiita.com/fkshom/items/53de3a9b9278cd524099)
 
+## sudo password less
+
+```
+sudo sed -e 's/%sudo\sALL=(ALL:ALL) /&NOPASSWD:/' /etc/sudoers | sudo EDITOR=tee visudo >/dev/null
+```
