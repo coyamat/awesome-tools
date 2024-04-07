@@ -20,7 +20,7 @@ function t() {
 ## APT mirror changes
 
 ```
-$ sudo sed -i.bak -e "s%http://jp.archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
+sudo sed -i.bak -e "s%http://jp.archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
 ```
 
 [apt-getの利用リポジトリを日本サーバーに変更する #Ubuntu - Qiita](https://qiita.com/fkshom/items/53de3a9b9278cd524099)
