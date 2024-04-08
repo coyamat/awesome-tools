@@ -2,8 +2,13 @@
     name = Tomoyuki KOYAMA
     email = __REPLACE_ME_
 [alias]
-    tree = log --graph --pretty=format:'%x09%C(auto) %h %Cgreen %ar %Creset%x09by"%C(cyan ul)%an%Creset" %x09%C(auto)%s %d'
+    tree = log --graph --all --format='%x09%C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s'
 	st = status
 	br = branch
 	ch = checkout
 	re = reset
+    pl = pull
+    ps = push
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
