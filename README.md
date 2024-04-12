@@ -20,6 +20,7 @@ brew install \
   meetingbar \
   podman-desktop \
   alt-tab \
+  rectangle \
   ;
 ```
 
