@@ -21,6 +21,7 @@ brew install \
   podman-desktop \
   alt-tab \
   rectangle \
+  hiddenbar \
   ;
 ```
 
