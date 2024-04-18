@@ -245,14 +245,21 @@ bindkey '^N' peco-kubens
 [[ /usr/bin/kubectl ]] && source <(kubectl completion zsh)
 
 # add ssh-keys
-if pgrep ssh-agent >/dev/null; then
+# if pgrep ssh-agent | wc -l ; then
+#     :
+# else
+#     rm -f /tmp/ssh-agent.sock
+#     eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
+#     ssh-add -k  &> /dev/null
+# fi
+if [ $(pgrep ssh-agent | wc -l) -eq 1 ]; then
     :
 else
     rm -f /tmp/ssh-agent.sock
+    pkill ssh-agent
     eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
     ssh-add -k  &> /dev/null
 fi
-
 
 alias pin1='ping 1.1.1.1'
 chpwd(){ls}
@@ -318,3 +325,6 @@ bindkey '^z' zi
 source ~/.zshrc_1password
 
 alias glow='glow -p'
+alias tf=terraform
+
+source ~/.zshrc_mercari
