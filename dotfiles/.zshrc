@@ -322,9 +322,12 @@ alias glog='fzf-git-show'
 zle -N zi
 bindkey '^z' zi
 
-source ~/.zshrc_1password
+#source ~/.zshrc_1password
 
 alias glow='glow -p'
 alias tf=terraform
 
-source ~/.zshrc_mercari
+#source ~/.zshrc_mercari
+
+alias -s json=bat
+alias -s md=glow
