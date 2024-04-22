@@ -44,6 +44,7 @@ brew install \
   pyenv \
   gh \
   jq \
+  yq \
   glow \
   bat \
   fzf \
