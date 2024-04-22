@@ -72,8 +72,19 @@ brew install \
 
 ## Zshrc
 
+Install
+
 ```
-brew install zsh-autosuggestions
+brew install \
+  zsh-autosuggestions \
+  zsh-syntax-highlighting \
+  ;
+```
+
+Setup
+
+```
+echo "source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 ```
 
 ## Bookmarklet
