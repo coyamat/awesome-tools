@@ -329,5 +329,9 @@ alias tf=terraform
 
 #source ~/.zshrc_mercari
 
-alias -s json=bat
+alias -s tgz='tar -xzvf'
+alias -s tar.gz='tar -xzvf'
+alias -s json=jq .
 alias -s md=glow
+alias -s csv=bat
+alias -s yaml=yq .
