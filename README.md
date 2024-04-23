@@ -37,17 +37,18 @@ brew install \
   grep \
   make \
   nodenv \
+  fzf \
   peco \
   ghq \
   kubectl \
   kubectx
   pyenv \
   gh \
+  gdrive \
   jq \
   yq \
   glow \
   bat \
-  fzf \
   htop \
   ynqa/tap/jnv \
   ag \
