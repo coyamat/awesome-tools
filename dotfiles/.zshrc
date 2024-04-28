@@ -244,21 +244,13 @@ bindkey '^N' peco-kubens
 
 [[ /usr/bin/kubectl ]] && source <(kubectl completion zsh)
 
-# add ssh-keys
-# if pgrep ssh-agent | wc -l ; then
-#     :
-# else
-#     rm -f /tmp/ssh-agent.sock
-#     eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
-#     ssh-add -k  &> /dev/null
-# fi
-if [ $(pgrep ssh-agent | wc -l) -eq 1 ]; then
-    :
-else
+if [ $(pgrep ssh-agent) -eq 0 ]; then
     rm -f /tmp/ssh-agent.sock
-    pkill ssh-agent
     eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
-    ssh-add -k  &> /dev/null
+    ssh-add ~/.ssh/id_ed25519  &> /dev/null
+else
+    export SSH_AUTH_SOCK=/tmp/ssh-agent.sock;
+    export SSH_AGENT_PID=$(pidof ssh-agent);
 fi
 
 alias pin1='ping 1.1.1.1'
