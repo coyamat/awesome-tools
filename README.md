@@ -36,6 +36,7 @@ brew install \
   gnu-sed \
   grep \
   make \
+  pidof
   nodenv \
   peco \
   ghq \
