@@ -329,3 +329,4 @@ alias -s zip=unzip
 alias -s tgz='tar -xzvf'
 alias -s tar.gz='tar -xzvf'
 alias -s csv=bat
+alias -s py=python
