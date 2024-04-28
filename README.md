@@ -42,7 +42,8 @@ brew install \
   peco \
   ghq \
   kubectl \
-  kubectx
+  kubectx \
+  krew \
   pyenv \
   gh \
   gdrive \
