@@ -321,5 +321,7 @@ alias tf=terraform
 
 #source ~/.zshrc_mercari
 
-alias -s json=bat
+alias -s json='jq .'
 alias -s md=glow
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+alias -s zip=unzip
