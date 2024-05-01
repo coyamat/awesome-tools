@@ -36,7 +36,7 @@ brew install \
   gnu-sed \
   grep \
   make \
-  pidof
+  pidof \
   nodenv \
   fzf \
   peco \
