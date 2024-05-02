@@ -7,6 +7,8 @@
 # sudo apt install xsel figlet peco
 # ghq:
 #   go get github.com/motemen/ghq 
+# bat:
+#   echo '--theme="Monokai Extended"' >> $(bat --config-file)
 
 # 言語設定
 export LC_ALL=en_US.UTF-8
@@ -296,7 +298,7 @@ alias v='fzf_vim_edit'
 function fzf-co() {
   git checkout $(git branch -a | \
     tr -d " " | \
-    fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | \
+    fzf --reverse --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | \
     head -n 1 | sed -e "s/^\*\s*//g" | \
     perl -pe "s/remotes\/origin\///g")
 }
@@ -335,8 +337,7 @@ alias -s go='go run'
 function search_with_ag_fzf () {
     local initial_query="${1}"
     local ag_command="ag --nobreak --numbers --noheading ."
-    eval "$ag_command" | fzf --delimiter=':' --preview "bat --style=numbers --color=always --highlight-line {2} {1} -r {2}:+10" --preview-window=up:70%:wrap --query="$initial_query" --bind 'change:reload:sleep 0.1; ag --nobreak --numbers --noheading {q}' --phony
-
+    eval "$ag_command" | fzf --reverse --delimiter=':' --preview "bat --style=numbers --color=always --highlight-line {2} {1} -r {2}:+10" --preview-window=down:30%:wrap --query="$initial_query" --bind 'change:reload:sleep 0.1; ag --nobreak --numbers --noheading {q}' --phony
 }
 zle -N search_with_ag_fzf
 bindkey '^F' search_with_ag_fzf
