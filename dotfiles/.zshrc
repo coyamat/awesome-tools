@@ -330,3 +330,13 @@ alias -s tgz='tar -xzvf'
 alias -s tar.gz='tar -xzvf'
 alias -s csv=bat
 alias -s py=python
+alias -s go='go run'
+
+function search_with_ag_fzf () {
+    local initial_query="${1}"
+    local ag_command="ag --nobreak --numbers --noheading ."
+    eval "$ag_command" | fzf --delimiter=':' --preview "bat --style=numbers --color=always --highlight-line {2} {1} -r {2}:+10" --preview-window=up:70%:wrap --query="$initial_query" --bind 'change:reload:sleep 0.1; ag --nobreak --numbers --noheading {q}' --phony
+
+}
+zle -N search_with_ag_fzf
+bindkey '^F' search_with_ag_fzf
