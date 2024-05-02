@@ -337,7 +337,15 @@ alias -s go='go run'
 function search_with_ag_fzf () {
     local initial_query="${1}"
     local ag_command="ag --nobreak --numbers --noheading ."
-    eval "$ag_command" | fzf --reverse --delimiter=':' --preview "bat --style=numbers --color=always --highlight-line {2} {1} -r {2}:+10" --preview-window=down:30%:wrap --query="$initial_query" --bind 'change:reload:sleep 0.1; ag --nobreak --numbers --noheading {q}' --phony
+    local selected_file=$(eval "$ag_command" | fzf --reverse --delimiter=':' --preview "bat --style=numbers --color=always --highlight-line {2} {1} -r {2}:+10" --preview-window=down:30%:wrap --query="$initial_query" --exit-0 --expect=enter)
+
+    if [[ "$selected_file" =~ ^enter ]]; then
+        local file_to_view=$(echo "$selected_file" | tail -n +2 | awk -F':' '{print $1}')
+        if [ -n "$file_to_view" ]; then
+            echo 
+            bat --style=numbers --color=always "$file_to_view" --pager="less -RF --no-init"
+        fi
+    fi
 }
 zle -N search_with_ag_fzf
 bindkey '^F' search_with_ag_fzf
