@@ -35,8 +35,11 @@ brew install \
   gawk \
   gnu-sed \
   grep \
+  ag \
   make \
-  pidof
+  htop \
+  pidof \
+  pyenv \
   nodenv \
   fzf \
   peco \
@@ -44,16 +47,14 @@ brew install \
   kubectl \
   kubectx \
   krew \
-  pyenv \
   gh \
   gdrive \
   jq \
   yq \
+  ynqa/tap/jnv \
   glow \
   bat \
-  htop \
-  ynqa/tap/jnv \
-  ag \
+  terminal-notifier \
   ;
 ```
 
