@@ -7,6 +7,8 @@
 # sudo apt install xsel figlet peco
 # ghq:
 #   go get github.com/motemen/ghq 
+# bat:
+#   echo '--theme="Monokai Extended"' >> $(bat --config-file)
 
 # 言語設定
 export LC_ALL=en_US.UTF-8
@@ -244,21 +246,13 @@ bindkey '^N' peco-kubens
 
 [[ /usr/bin/kubectl ]] && source <(kubectl completion zsh)
 
-# add ssh-keys
-# if pgrep ssh-agent | wc -l ; then
-#     :
-# else
-#     rm -f /tmp/ssh-agent.sock
-#     eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
-#     ssh-add -k  &> /dev/null
-# fi
-if [ $(pgrep ssh-agent | wc -l) -eq 1 ]; then
-    :
-else
+if [ $(pgrep ssh-agent) -eq 0 ]; then
     rm -f /tmp/ssh-agent.sock
-    pkill ssh-agent
     eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
-    ssh-add -k  &> /dev/null
+    ssh-add ~/.ssh/id_ed25519  &> /dev/null
+else
+    export SSH_AUTH_SOCK=/tmp/ssh-agent.sock;
+    export SSH_AGENT_PID=$(pidof ssh-agent);
 fi
 
 alias pin1='ping 1.1.1.1'
@@ -304,7 +298,7 @@ alias v='fzf_vim_edit'
 function fzf-co() {
   git checkout $(git branch -a | \
     tr -d " " | \
-    fzf --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | \
+    fzf --reverse --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | \
     head -n 1 | sed -e "s/^\*\s*//g" | \
     perl -pe "s/remotes\/origin\///g")
 }
@@ -329,9 +323,29 @@ alias tf=terraform
 
 #source ~/.zshrc_mercari
 
+alias -s json='jq .'
+alias -s yaml='yq .'
+alias -s md=glow
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+alias -s zip=unzip
 alias -s tgz='tar -xzvf'
 alias -s tar.gz='tar -xzvf'
-alias -s json=jq .
-alias -s md=glow
 alias -s csv=bat
-alias -s yaml=yq .
+alias -s py=python
+alias -s go='go run'
+
+function search_with_ag_fzf () {
+    local initial_query="${1}"
+    local ag_command="ag --nobreak --numbers --noheading ."
+    local selected_file=$(eval "$ag_command" | fzf --reverse --delimiter=':' --preview "bat --style=numbers --color=always --highlight-line {2} {1} -r {2}:+10" --preview-window=down:30%:wrap --query="$initial_query" --exit-0 --expect=enter)
+
+    if [[ "$selected_file" =~ ^enter ]]; then
+        local file_to_view=$(echo "$selected_file" | tail -n +2 | awk -F':' '{print $1}')
+        if [ -n "$file_to_view" ]; then
+            echo 
+            bat --style=numbers --color=always "$file_to_view" --pager="less -RF --no-init"
+        fi
+    fi
+}
+zle -N search_with_ag_fzf
+bindkey '^F' search_with_ag_fzf
