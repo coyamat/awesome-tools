@@ -22,6 +22,7 @@ brew install \
   alt-tab \
   rectangle \
   hiddenbar \
+  macdown \
   ;
 ```
 
@@ -63,6 +64,7 @@ brew install \
   google-cloud-sdk \
   cloudflared \
   bitwarden-cli \
+  kind \
   ;
 ```
 
