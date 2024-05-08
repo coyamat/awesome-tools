@@ -246,7 +246,7 @@ bindkey '^N' peco-kubens
 
 [[ /usr/bin/kubectl ]] && source <(kubectl completion zsh)
 
-if [ $(pgrep ssh-agent) -eq 0 ]; then
+if [ $(pgrep ssh-agent | wc -l) -eq 0 ]; then
     rm -f /tmp/ssh-agent.sock
     eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
     ssh-add ~/.ssh/id_ed25519  &> /dev/null
