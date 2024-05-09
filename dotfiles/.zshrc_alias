@@ -1,0 +1,69 @@
+# Short
+alias ll='ls -laF'
+alias la='ls -aF'
+alias lns='ln -s'
+alias sl='ls'
+alias l='ls'
+alias cdd='cd $_'
+alias suod='sudo'
+alias vm='vim'
+alias g='git'
+alias k=kubectl
+alias tf=terraform
+
+# Override
+alias ls='ls -F'
+alias exiftool='exiftool -lang ja'
+alias exiftool-all='exiftool -lang ja -all='
+alias vim='vim -o'
+alias glow='glow -p'
+
+# Original
+alias simple="export PS1='$ '"
+alias ports='netstat -antu | grep -i listen'
+alias mkwdir='mkdir work_$(date +%Y%m%d); cd $_'
+alias gpom='git push origin master'
+alias py='python3'
+alias jwhois="whois -h whois.jprs.jp"
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias codeh='code -r .'
+alias emacs='vim'
+alias sha512sum='openssl dgst -sha512'
+alias sha256sum='openssl dgst -sha256'
+alias md5sum='md5'
+alias pin1='ping 1.1.1.1'
+function heic2jpg() {
+	if [ -z "$1" ]; then
+		echo "Invalid options"
+		exit 1
+	fi
+	fname=$(echo $1 | gsed 's/.HEIC$/.jpg/i')
+	sips -s format jpeg "$1" -o "$fname"
+}
+function pdf-unlock {
+	if [[ -z $2 ]]; then
+		echo -n "Password> "
+		read pdf_password
+	else
+		pdf_password="$2"
+	fi
+	pdftk $1 input_pw $pdf_password output output.pdf
+}
+
+# docker
+alias docker-trr='docker run -it --rm tomoyk/docker-trr'
+alias docker-php="docker run --rm -p 8000:80 -v ~/public_html:/var/www/html --name php7 -d php:7.0-apache"
+# function docker-ts {
+# curl -s https://registry.hub.docker.com/v1/repositories/$1/tags | sed "s/,/\n/g" | grep name | cut -d '"' -f 4
+# }
+
+# Suffix
+alias -s zip=unzip
+alias -s tgz='tar -xzvf'
+alias -s tar.gz='tar -xzvf'
+alias -s csv=bat
+alias -s py=python
+alias -s go='go run'
+alias -s json='jq .'
+alias -s yaml='yq .'
+alias -s md=glow
