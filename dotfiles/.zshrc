@@ -10,13 +10,10 @@
 # bat:
 #   echo '--theme="Monokai Extended"' >> $(bat --config-file)
 
-# 言語設定
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-# PATHの設定
-export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
-export PATH="$PATH:$HOME/bin"
+export TERM=xterm-256color
+export EDITOR=vim
 
 # zsh-completions
 if type brew &>/dev/null; then
@@ -25,39 +22,21 @@ if type brew &>/dev/null; then
   autoload -Uz compinit && compinit
 fi
 
-# cd alternative
-eval "$(zoxide init zsh)"
+# zsh-syntax-highlight
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-#予測入力
-# autoload predict-on
-# predict-on
+# ssh-agent
+if [ $(pgrep ssh-agent | wc -l) -eq 0 ]; then
+    rm -f /tmp/ssh-agent.sock
+    eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
+    ssh-add ~/.ssh/id_ed25519  &> /dev/null
+else
+    export SSH_AUTH_SOCK=/tmp/ssh-agent.sock;
+    export SSH_AGENT_PID=$(pidof ssh-agent);
+fi
 
-# python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-
-# node
-export PATH="$HOME/.nodenv/bin:$PATH"
-eval "$(nodenv init -)"
-
-# go
-export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$PATH:/opt/go/bin"
-
-# homebrew
-export PATH="/opt/homebrew/sbin:$PATH"
-
-# krew
-export PATH="${PATH}:${HOME}/.krew/bin"
-
-# texlive
-export PATH="${PATH}:/usr/local/texlive/2022/bin/universal-darwin"
-launchctl setenv PATH $PATH
-
-# エディタ
-export EDITOR=vim
+# cd -> ls
+chpwd(){ls}
 
 # 履歴ファイルの保存先
 export HISTFILE=${HOME}/.zhistory
@@ -68,7 +47,6 @@ export SAVEHIST=100000
 
 # viキーバインド
 bindkey -e
-
 # インクリメンタルからの検索
 bindkey "^R" history-incremental-search-backward
 #入力途中の履歴補完を有効化する
@@ -137,215 +115,13 @@ setopt prompt_subst
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 ##
-# Alias
-##
-
-# base
-alias ls='ls -F'
-alias ll='ls -laF'
-alias la='ls -aF'
-alias lns='ln -s'
-alias emacs='vim'
-alias sl='ls'
-alias l='ls'
-alias cdd='cd $_'
-alias suod='sudo'
-alias vm='vim'
-alias g='git'
-
-# overwrite
-alias exiftool='exiftool -lang ja'
-alias exiftool-all='exiftool -lang ja -all='
-alias vim='vim -o'
-
-# short-tool 
-alias simple="export PS1='$ '"
-alias ports='netstat -antu | grep -i listen'
-alias mkwdir='mkdir work_$(date +%Y%m%d); cd $_'
-alias gpom='git push origin master'
-alias py='python3'
-alias jwhois="whois -h whois.jprs.jp"
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-# alias pbcopy="xsel --clipboard --input"
-# alias pbcopy='clip.exe'
-function pdf-unlock {
-    if [[ -z $2 ]]; then
-        echo -n "Password> "
-        read pdf_password
-    else
-        pdf_password="$2"
-    fi
-    pdftk $1 input_pw $pdf_password output output.pdf
-}
-
-# docker
-alias docker-trr='docker run -it --rm tomoyk/docker-trr'
-alias docker-php="docker run --rm -p 8000:80 -v ~/public_html:/var/www/html --name php7 -d php:7.0-apache"
-
-# check sum
-alias sha512sum='openssl dgst -sha512'
-alias sha256sum='openssl dgst -sha256'
-alias md5sum='md5'
-
-alias k=kubectl
-alias ether='ifconfig enp0s31f6'
-
-function docker-ts {
-    curl -s https://registry.hub.docker.com/v1/repositories/$1/tags | sed "s/,/\n/g" | grep name | cut -d '"' -f 4
-}
-
-# prompt
-# export PROMPT='%F{green}%n@%m%f:%~# '
 # 色付け
+##
 autoload -Uz colors && colors
-# powerline風
 export PROMPT="%{${bg[white]}%}%{${fg[black]}%}%D{%Y-%m-%d %H:%M:%S} %~ %{${reset_color}%}%{${fg[white]}%}  %{${reset_color}%}"
 
-# peco git repository
-function peco-src () {
-    local selected_dir=$(ghq list -p | peco --query "$LBUFFER" --prompt "REPOSITORY>")
-    if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
-        zle accept-line
-    fi
-    zle clear-screen
-}
-zle -N peco-src
-bindkey '^]' peco-src
-
-# fzf history
-function fzf-select-history() {
-    BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
-    CURSOR=$#BUFFER
-    zle reset-prompt
-}
-zle -N fzf-select-history
-bindkey '^R' fzf-select-history
-
-# peco kubectx
-function peco-kubectx() {
-    local kube_context=$(kubectx | peco --prompt "Kube Context>")
-    if [ -n "$kube_context" ]; then
-        BUFFER="kubectx ${kube_context}"
-        zle accept-line
-    fi
-}
-zle -N peco-kubectx
-bindkey '^K' peco-kubectx
-
-# peco kubens
-function peco-kubens() {
-    local kube_ns=$(kubens | peco --prompt "Kube Namespace>")
-    if [ -n "$kube_ns" ]; then
-        BUFFER="kubens ${kube_ns}"
-        zle accept-line
-    fi
-}
-zle -N peco-kubens
-bindkey '^N' peco-kubens
-
-[[ /usr/bin/kubectl ]] && source <(kubectl completion zsh)
-
-if [ $(pgrep ssh-agent | wc -l) -eq 0 ]; then
-    rm -f /tmp/ssh-agent.sock
-    eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
-    ssh-add ~/.ssh/id_ed25519  &> /dev/null
-else
-    export SSH_AUTH_SOCK=/tmp/ssh-agent.sock;
-    export SSH_AGENT_PID=$(pidof ssh-agent);
-fi
-
-alias pin1='ping 1.1.1.1'
-chpwd(){ls}
-
-export TERM=xterm-256color
-
-alias thesis='code /Users/tkoyama/ghq/github.com/tomoyk/master-thesis'
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-export PATH="$HOME/.embulk/bin:$PATH"
-
-function heic2jpg() {
-    if [ -z "$1" ]; then
-        echo "Invalid options"
-        exit 1
-    fi
-    fname=$(echo $1 | gsed 's/.HEIC$/.jpg/i')
-    sips -s format jpeg "$1" -o "$fname"
-}
-
-alias codeh='code -r .'
-
-
-# fzf-cd
-fzf-cd() {
-  local selected_dir
-  selected_dir=$(find ${1:-.} -type d 2> /dev/null | fzf-tmux +m) && cd "$selected_dir"
-}
-zle -N fzf-cd-widget fzf-cd
-bindkey '^G' fzf-cd-widget
-
-# fzf-vim
-fzf_vim_edit() {
-    local file
-    file=$(fzf --reverse --preview="bat --color=always --style=header,grid --line-range :40 {}" --preview-window=right:60%:wrap)
-    if [ -n "$file" ]; then
-        vim "$file"
-    fi
-}
-alias v='fzf_vim_edit'
-
-# fzf-git-branch
-function fzf-co() {
-  git checkout $(git branch -a | \
-    tr -d " " | \
-    fzf --reverse --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" | \
-    head -n 1 | sed -e "s/^\*\s*//g" | \
-    perl -pe "s/remotes\/origin\///g")
-}
-zle -N fzf-co
-bindkey '^B' fzf-co
-
-# fzf-git-show
-function fzf-git-show {
-    git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort --preview "git show --color=always {1} | less -R" --preview-window=:wrap --bind "enter:execute: (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % git show --color=always % | less -R)"
-}
-alias glog='fzf-git-show'
-
-# zoxide-cd
-zle -N zi
-bindkey '^z' zi
-
-#source ~/.zshrc_1password
-
-alias glow='glow -p'
-alias tf=terraform
-
-#source ~/.zshrc_mercari
-
-alias -s json='jq .'
-alias -s yaml='yq .'
-alias -s md=glow
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-alias -s zip=unzip
-alias -s tgz='tar -xzvf'
-alias -s tar.gz='tar -xzvf'
-alias -s csv=bat
-alias -s py=python
-alias -s go='go run'
-
-function search_with_ag_fzf () {
-    local initial_query="${1}"
-    local ag_command="ag --nobreak --numbers --noheading ."
-    local selected_file=$(eval "$ag_command" | fzf --reverse --delimiter=':' --preview "bat --style=numbers --color=always --highlight-line {2} {1} -r {2}:+10" --preview-window=down:30%:wrap --query="$initial_query" --exit-0 --expect=enter)
-
-    if [[ "$selected_file" =~ ^enter ]]; then
-        local file_to_view=$(echo "$selected_file" | tail -n +2 | awk -F':' '{print $1}')
-        if [ -n "$file_to_view" ]; then
-            echo 
-            bat --style=numbers --color=always "$file_to_view" --pager="less -RF --no-init"
-        fi
-    fi
-}
-zle -N search_with_ag_fzf
-bindkey '^F' search_with_ag_fzf
+source ~/.zshrc_alias
+source ~/.zshrc_key_binding
+source ~/.zshrc_1password
+source ~/.zshrc_mercari
+source ~/.zshrc_path_completion
