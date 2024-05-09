@@ -6,7 +6,7 @@
 #   https://github.com/zsh-users/zsh-completions
 # sudo apt install xsel figlet peco
 # ghq:
-#   go get github.com/motemen/ghq 
+#   go get github.com/motemen/ghq
 # bat:
 #   echo '--theme="Monokai Extended"' >> $(bat --config-file)
 
@@ -17,9 +17,9 @@ export EDITOR=vim
 
 # zsh-completions
 if type brew &>/dev/null; then
-  FPATH=/opt/homebrew/share/zsh-completions:$FPATH
-  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  autoload -Uz compinit && compinit
+	FPATH=/opt/homebrew/share/zsh-completions:$FPATH
+	source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+	autoload -Uz compinit && compinit
 fi
 
 # zsh-syntax-highlight
@@ -27,16 +27,16 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # ssh-agent
 if [ $(pgrep ssh-agent | wc -l) -eq 0 ]; then
-    rm -f /tmp/ssh-agent.sock
-    eval $(ssh-agent -a /tmp/ssh-agent.sock) &> /dev/null
-    ssh-add ~/.ssh/id_ed25519  &> /dev/null
+	rm -f /tmp/ssh-agent.sock
+	eval $(ssh-agent -a /tmp/ssh-agent.sock) &>/dev/null
+	ssh-add ~/.ssh/id_ed25519 &>/dev/null
 else
-    export SSH_AUTH_SOCK=/tmp/ssh-agent.sock;
-    export SSH_AGENT_PID=$(pidof ssh-agent);
+	export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+	export SSH_AGENT_PID=$(pidof ssh-agent)
 fi
 
 # cd -> ls
-chpwd(){ls}
+chpwd() {ls}
 
 # 履歴ファイルの保存先
 export HISTFILE=${HOME}/.zhistory
@@ -92,7 +92,7 @@ setopt share_history
 
 # vcs_infoを読み込み
 autoload -Uz vcs_info
- 
+
 # vcs_info_msg_0_変数をどのように表示するかフォーマットの指定
 ## デフォルトのフォーマット
 ### %s: どのバージョン管理システムを使っているか（git, svnなど）
@@ -101,12 +101,14 @@ zstyle ':vcs_info:*' formats '(%s)[%b]'
 ## 特別な状態（mergeでコンフリクトしたときなど）でのフォーマット
 ### %a: アクション名（merge, rebaseなど）
 zstyle ':vcs_info:*' actionformats '(%s)[%b|%a]'
- 
+
 # プロンプトが表示される毎にバージョン管理システムの情報を取得
 ## precmd: プロンプトが表示される毎に実行される関数
 ## vcs_info: バージョン管理システムから情報を取得
-precmd () { vcs_info }
- 
+function precmd() {
+	vcs_info
+}
+
 # 右プロンプトに表示
 ## prompt_subst: プロンプトを表示する際に変数を展開するオプション
 setopt prompt_subst
