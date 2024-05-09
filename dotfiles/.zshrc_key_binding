@@ -1,0 +1,100 @@
+# cd alternative / zoxide-cd
+eval "$(zoxide init zsh)"
+zle -N zi
+bindkey '^z' zi
+
+# Grep
+function search_with_ag_fzf() {
+	local initial_query="${1}"
+	local ag_command="ag --nobreak --numbers --noheading ."
+	local selected_file=$(eval "$ag_command" | fzf --reverse --delimiter=':' --preview "bat --style=numbers --color=always --highlight-line {2} {1} -r {2}:+10" --preview-window=down:30%:wrap --query="$initial_query" --exit-0 --expect=enter)
+
+	if [[ "$selected_file" =~ ^enter ]]; then
+		local file_to_view=$(echo "$selected_file" | tail -n +2 | awk -F':' '{print $1}')
+		if [ -n "$file_to_view" ]; then
+			echo
+			bat --style=numbers --color=always "$file_to_view" --pager="less -RF --no-init"
+		fi
+	fi
+}
+zle -N search_with_ag_fzf
+bindkey '^F' search_with_ag_fzf
+
+# Git log
+function fzf-git-show {
+	git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+		fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort --preview "git show --color=always {1} | less -R" --preview-window=:wrap --bind "enter:execute: (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % git show --color=always % | less -R)"
+}
+alias glog='fzf-git-show'
+
+# Git branch
+function fzf-co() {
+	git checkout $(git branch -a |
+		tr -d " " |
+		fzf --reverse --height 100% --prompt "CHECKOUT BRANCH>" --preview "git log --color=always {}" |
+		head -n 1 | sed -e "s/^\*\s*//g" |
+		perl -pe "s/remotes\/origin\///g")
+}
+zle -N fzf-co
+bindkey '^B' fzf-co
+
+# Vim
+fzf_vim_edit() {
+	local file
+	file=$(fzf --reverse --preview="bat --color=always --style=header,grid --line-range :40 {}" --preview-window=right:60%:wrap)
+	if [ -n "$file" ]; then
+		vim "$file"
+	fi
+}
+alias v='fzf_vim_edit'
+
+# History
+function fzf-select-history() {
+	BUFFER=$(history -n -r 1 | fzf --query "$LBUFFER" --reverse)
+	CURSOR=$#BUFFER
+	zle reset-prompt
+}
+zle -N fzf-select-history
+bindkey '^R' fzf-select-history
+
+# Cd
+# fzf-cd() {
+#   local selected_dir
+#   selected_dir=$(find ${1:-.} -type d 2> /dev/null | fzf-tmux +m) && cd "$selected_dir"
+# }
+# zle -N fzf-cd-widget fzf-cd
+# bindkey '^G' fzf-cd-widget
+
+# peco kubectx
+function peco-kubectx() {
+	local kube_context=$(kubectx | peco --prompt "Kube Context>")
+	if [ -n "$kube_context" ]; then
+		BUFFER="kubectx ${kube_context}"
+		zle accept-line
+	fi
+}
+zle -N peco-kubectx
+bindkey '^K' peco-kubectx
+
+# peco git repository
+function peco-src() {
+	local selected_dir=$(ghq list -p | peco --query "$LBUFFER" --prompt "REPOSITORY>")
+	if [ -n "$selected_dir" ]; then
+		BUFFER="cd ${selected_dir}"
+		zle accept-line
+	fi
+	zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
+
+# peco kubens
+function peco-kubens() {
+	local kube_ns=$(kubens | peco --prompt "Kube Namespace>")
+	if [ -n "$kube_ns" ]; then
+		BUFFER="kubens ${kube_ns}"
+		zle accept-line
+	fi
+}
+zle -N peco-kubens
+bindkey '^N' peco-kubens
