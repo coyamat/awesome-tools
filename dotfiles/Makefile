@@ -10,6 +10,6 @@ default:
 
 install:
 	@for file in $(ZSH_FILES); do \
-    echo "Copy $$file"; \
-    cp $$file $(HOME_DIR); \
+	echo "Copy $$file"; \
+	cp $$file $(HOME_DIR); \
 	done
