@@ -1,5 +1,6 @@
 SHELL := /bin/zsh
 ZSH_FILES := $(wildcard .zshrc*)
+HOME_DIR := $(shell echo ~)
 
 default:
 	@for file in $(ZSH_FILES); do \
@@ -7,3 +8,8 @@ default:
 	shfmt -w $$file; \
 	done
 
+install:
+	@for file in $(ZSH_FILES); do \
+    echo "Copy $$file"; \
+    cp $$file $(HOME_DIR); \
+	done
