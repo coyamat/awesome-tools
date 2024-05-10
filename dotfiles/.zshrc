@@ -10,17 +10,20 @@
 # bat:
 #   echo '--theme="Monokai Extended"' >> $(bat --config-file)
 
+function load_if_exist() {
+  [[ -e $1 ]] && source $1
+}
+
+source ~/.zshrc_path_completion
+source ~/.zshrc_alias
+source ~/.zshrc_key_binding
+load_if_exist "~/.zshrc_1password"
+load_if_exist "~/.zshrc_mercari"
+
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export TERM=xterm-256color
 export EDITOR=vim
-
-# zsh-completions
-if type brew &>/dev/null; then
-	FPATH=/opt/homebrew/share/zsh-completions:$FPATH
-	source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-	autoload -Uz compinit && compinit
-fi
 
 # zsh-syntax-highlight
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -121,9 +124,3 @@ RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 ##
 autoload -Uz colors && colors
 export PROMPT="%{${bg[white]}%}%{${fg[black]}%}%D{%Y-%m-%d %H:%M:%S} %~ %{${reset_color}%}%{${fg[white]}%}  %{${reset_color}%}"
-
-source ~/.zshrc_alias
-source ~/.zshrc_key_binding
-source ~/.zshrc_1password
-source ~/.zshrc_mercari
-source ~/.zshrc_path_completion
