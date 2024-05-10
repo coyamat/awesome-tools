@@ -11,7 +11,7 @@
 #   echo '--theme="Monokai Extended"' >> $(bat --config-file)
 
 function load_if_exist() {
-  [[ -e $1 ]] && source $1
+	[[ -e $1 ]] && source $1
 }
 
 source ~/.zshrc_path_completion

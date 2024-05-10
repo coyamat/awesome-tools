@@ -1,3 +1,11 @@
+# zsh-completions
+if type brew &>/dev/null; then
+	FPATH=/opt/homebrew/share/zsh-completions:$FPATH
+	source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+	autoload -Uz compinit && compinit
+fi
+autoload -Uz compinit && compinit
+
 # Homebew
 export PATH="/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:$PATH"
 
