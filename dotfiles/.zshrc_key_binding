@@ -1,7 +1,7 @@
 # cd alternative / zoxide-cd
 eval "$(zoxide init zsh)"
 zle -N zi
-bindkey '^z' zi
+bindkey '^g' zi
 
 # Grep
 function search_with_ag_fzf() {
