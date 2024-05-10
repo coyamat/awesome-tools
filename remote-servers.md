@@ -4,9 +4,9 @@
 
 ```
 if tmux ls; then
-  tmux a
+    tmux a
 else
-  tmux
+    tmux
 fi
 ```
 
@@ -14,6 +14,22 @@ fi
 function t() {
     session_name=$(tmux ls | fzf | awk -F: '{print $1}')
     tmux a -t $session_name
+}
+```
+
+```
+function tmux-ssh() {
+    agent="$HOME/.ssh/agent"
+    if [ -S "$SSH_AUTH_SOCK" ]; then
+        case $SSH_AUTH_SOCK in
+        /tmp/*/agent.[0-9]*)
+            ln -snf "$SSH_AUTH_SOCK" $agent && export SSH_AUTH_SOCK=$agent
+        esac
+    elif [ -S $agent ]; then
+        export SSH_AUTH_SOCK=$agent
+    else
+        echo "no ssh-agent"
+    fi
 }
 ```
 
