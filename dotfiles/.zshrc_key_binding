@@ -1,3 +1,6 @@
+# emacs mode
+bindkey -e
+
 # cd alternative / zoxide-cd
 eval "$(zoxide init zsh)"
 zle -N zi

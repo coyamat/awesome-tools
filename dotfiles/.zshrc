@@ -48,10 +48,6 @@ export HISTSIZE=1000
 # 履歴ファイルに保存される履歴の件数
 export SAVEHIST=100000
 
-# viキーバインド
-bindkey -e
-# インクリメンタルからの検索
-bindkey "^R" history-incremental-search-backward
 #入力途中の履歴補完を有効化する
 autoload history-search-end
 #/foo/barでいきなりcd
