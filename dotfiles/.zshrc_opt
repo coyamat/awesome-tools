@@ -1,0 +1,36 @@
+#入力途中の履歴補完を有効化する
+autoload history-search-end
+#/foo/barでいきなりcd
+setopt AUTO_CD
+#変数名を補完する
+setopt AUTO_PARAM_KEYS
+#echo {a-z}などを使えるようにする
+setopt BRACE_CCL
+#コマンドのスペルの訂正を使用する
+setopt CORRECT
+#引数のスペルの訂正を使用する
+# setopt CORRECT_ALL
+#aliasを展開して補完
+setopt COMPLETE_ALIASES
+#語の途中でもカーソル位置で補完
+setopt COMPLETE_IN_WORD
+#ヒストリに時刻情報もつける
+setopt EXTENDED_HISTORY
+# ワイルドカード展開を使用する
+setopt extended_glob
+#$0 にスクリプト名/シェル関数名を格納
+setopt FUNCTION_ARGZERO
+# 重複を記録しない
+setopt hist_ignore_dups
+# ヒストリに追加されるコマンド行が古いものと同じなら古いものを削除
+setopt hist_ignore_all_dups
+# ヒストリを呼び出してから実行する間に一旦編集可能
+setopt hist_verify
+# 余分な空白は詰めて記録
+setopt hist_reduce_blanks
+# 古いコマンドと同じものは無視
+setopt hist_save_no_dups
+# 履歴をインクリメンタルに追加
+setopt inc_append_history
+# historyを共有
+setopt share_history
