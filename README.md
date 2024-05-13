@@ -33,8 +33,12 @@ Required:
 ```
 brew install \
   coreutils \
+  findutils \
+  diffutils \
+  binutils \
   gawk \
   gnu-sed \
+  gnu-tar \
   grep \
   ag \
   make \
