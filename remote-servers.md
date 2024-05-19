@@ -100,6 +100,10 @@ network:
   sudo netplan try --timeout 10
   ```
 
+## Swap
+
+[Ubuntu 20.04にスワップ領域を追加する方法 | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-20-04-ja)
+
 ## ファイアウォール
 
 - SYN Floodの対策
