@@ -60,6 +60,7 @@ brew install \
   glow \
   bat \
   terminal-notifier \
+  shellcheck \
   ;
 ```
 
