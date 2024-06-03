@@ -40,6 +40,7 @@ brew install \
   gnu-sed \
   gnu-tar \
   grep \
+  wget \
   ag \
   make \
   htop \
