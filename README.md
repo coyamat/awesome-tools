@@ -62,6 +62,7 @@ brew install \
   bat \
   terminal-notifier \
   shellcheck \
+  tmux \
   ;
 ```
 
