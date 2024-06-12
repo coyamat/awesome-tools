@@ -75,6 +75,7 @@ brew install \
   terminal-notifier \
   shellcheck \
   tmux \
+  tmux-xpanes \
   ;
 ```
 
