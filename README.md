@@ -8,13 +8,24 @@ https://brew.sh/
 
 ## TouchIDでsudo
 
+```
+$ sw_vers
+ProductName:		macOS
+ProductVersion:		14.5
+BuildVersion:		23F79
+
+# If Product Version is greater than 14.0
+sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local
+sed -e 's/^#auth/auth/' /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local
+```
+
 [macOS Sonoma 14.xでsudo実行時にTouch IDで認証する機能を有効化する手順 #macOS - Qiita](https://qiita.com/notakaos/items/fbc817741d43f24bf300)
 
 ## Desktop Applications
 
 ```
 brew install \
-  iterm \
+  iterm2 \
   raycast \
   visual-studio-code \
   meetingbar \
@@ -47,6 +58,7 @@ brew install \
   pidof \
   pyenv \
   nodenv \
+  zoxide \
   fzf \
   peco \
   ghq \
@@ -74,18 +86,12 @@ brew install \
   google-cloud-sdk \
   cloudflared \
   bitwarden-cli \
+  1password-cli \
   kind \
   ;
 ```
 
-## Other Tools
-
-- [seachicken/gh-poi: ✨ Safely clean up your local branches](https://github.com/seachicken/gh-poi)
-- [macOSのメニューバーのアイコンを非表示にするアプリ #macOS - Qiita](https://qiita.com/tomoyk/items/8e6113b06b6f385c71f8)
-
-## Zshrc
-
-Install
+## zshrc
 
 ```
 brew install \
@@ -94,11 +100,10 @@ brew install \
   ;
 ```
 
-Setup
+## Other Tools
 
-```
-echo "source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-```
+- [seachicken/gh-poi: ✨ Safely clean up your local branches](https://github.com/seachicken/gh-poi)
+- [macOSのメニューバーのアイコンを非表示にするアプリ #macOS - Qiita](https://qiita.com/tomoyk/items/8e6113b06b6f385c71f8)
 
 ## Bookmarklet
 
