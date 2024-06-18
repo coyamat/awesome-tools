@@ -1,6 +1,9 @@
 # Homebew
 export PATH="/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:$PATH"
 
+# bashcompinit
+autoload bashcompinit && bashcompinit
+
 # zsh-completions
 autoload -Uz compinit && compinit
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
