@@ -13,3 +13,9 @@ install:
 	echo "Copy $$file"; \
 	cp $$file $(HOME_DIR); \
 	done
+
+diff:
+	@for file in $(ZSH_FILES); do \
+	echo "++++++ $$file ++++++"; \
+	diff $$file $(HOME_DIR)/$$file; \
+	done

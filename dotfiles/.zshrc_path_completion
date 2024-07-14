@@ -29,8 +29,11 @@ export PATH="$PATH:/opt/go/bin"
 export PATH="${PATH}:${HOME}/.krew/bin"
 
 # texlive
-export PATH="${PATH}:/usr/local/texlive/2022/bin/universal-darwin"
+export PATH="${PATH}:/usr/local/texlive/2024/bin/universal-darwin"
 launchctl setenv PATH $PATH
 
 # kubectl
 [[ /usr/bin/kubectl ]] && source <(kubectl completion zsh)
+
+# Ruby
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
