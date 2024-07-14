@@ -19,3 +19,7 @@ diff:
 	echo "++++++ $$file ++++++"; \
 	diff $$file $(HOME_DIR)/$$file; \
 	done
+
+brew:
+	brew bundle dump --global
+	mv $(HOME_DIR)/.Brewfile .
