@@ -68,6 +68,7 @@ brew install \
   peco \
   pidof \
   pyenv \
+  ripgrep \
   shellcheck \
   terminal-notifier \
   tmux \
