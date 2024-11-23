@@ -49,6 +49,9 @@ function pdf-unlock {
 	fi
 	pdftk $1 input_pw $pdf_password output output.pdf
 }
+function sss () {
+	ssh -A $(grep '^Host\ ' ~/.ssh/config | awk '{print $2}' | fzf)
+}
 
 # docker
 alias docker-trr='docker run -it --rm tomoyk/docker-trr'
