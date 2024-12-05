@@ -16,7 +16,8 @@ function search_with_ag_fzf() {
 		local file_to_view=$(echo "$selected_file" | tail -n +2 | awk -F':' '{print $1}')
 		if [ -n "$file_to_view" ]; then
 			echo
-			bat --style=plain --color=always "$file_to_view" --pager="less -RF --no-init"
+			# bat --style=numbers --color=always "$file_to_view" --pager="less -RF --no-init"
+      vim "$file_to_view"
 		fi
 	fi
 }
