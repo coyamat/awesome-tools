@@ -74,4 +74,4 @@ alias -s json='jq .'
 alias -s yaml='yq .'
 alias -s md=glow
 
-
+alias cd-icloud='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'
