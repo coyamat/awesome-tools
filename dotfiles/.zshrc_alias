@@ -50,7 +50,7 @@ function pdf-unlock {
 	pdftk $1 input_pw $pdf_password output output.pdf
 }
 function sss () {
-  ssh -A $(grep '^Host\ ' ~/.ssh/config | awk '{print $2}' | fzf)
+  ssh -A $(grep -r '^Host\ \w\+' ~/.ssh/* | awk '{print $2}' | fzf)
 }
 function kns() {
   kubectl config set-context $(kubectl config current-context) --namespace=$1
