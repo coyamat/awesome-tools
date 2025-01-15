@@ -33,6 +33,7 @@ brew install \
   podman-desktop \
   raycast \
   rectangle \
+  homerow \
   visual-studio-code \
   ;
 ```
