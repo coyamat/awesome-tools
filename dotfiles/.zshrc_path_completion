@@ -41,3 +41,6 @@ launchctl setenv PATH $PATH
 
 # unzip
 export PATH="/opt/homebrew/opt/unzip/bin:${PATH}"
+
+# Ruby
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
