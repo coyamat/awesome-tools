@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(kubectl get *)",
+      "Bash(kubectl describe *)",
+      "Bash(kubectl logs *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(ls *)",
+      "Bash(ls)",
+      "Bash(grep *)",
+      "Bash(ag *)",
+      "Bash(locate *)",
+      "Bash(find *)",
+      "Bash(pwd)",
+      "Bash(mkdir *)",
+      "Bash(touch *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(ping *)",
+      "Bash(nc *)",
+      "Bash(echo *)",
+      "Bash(wc *)",
+      "Bash(awk *)",
+      "Bash(cut *)"
+    ]
+  }
+}
