@@ -1,0 +1,10 @@
+function gc-pdx2 {
+  IPADDR=$(gcloud compute instances describe gc-pdx2 --zone=us-west1-a --format='get(networkInterfaces[0].accessConfigs[0].natIP)' | grep -o '[0-9\.]\+')
+  ssh $IPADDR -l ubuntu -p 24825
+}
+
+function vpn-route {
+  ipaddr=$(ifconfig ppp0 | grep -o '192.168.[0-9\.]\+')
+  # sudo route add -net 10.200.0.0/14 "$ipaddr"
+  sudo route add -net 10.204.0.0/16 "$ipaddr"
+}

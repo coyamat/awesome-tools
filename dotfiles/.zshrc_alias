@@ -75,3 +75,6 @@ alias -s yaml='yq .'
 alias -s md=glow
 
 alias cd-icloud='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/'
+alias thesis='/Users/tkoyama/ghq/github.com/tomoyk/ipsj-paper-2025'
+alias note='/Users/tkoyama/ghq/github.com/tomoyk/phd-study-note'
+

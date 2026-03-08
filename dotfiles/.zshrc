@@ -14,8 +14,10 @@ source ~/.zshrc_path_completion
 source ~/.zshrc_alias
 source ~/.zshrc_key_binding
 source ~/.zshrc_style
+load_if_exist "$HOME/.zshrc_llm"
 load_if_exist "$HOME/.zshrc_1password"
 load_if_exist "$HOME/.zshrc_mercari"
+load_if_exist "$HOME/.zshrc_priv"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -41,3 +43,6 @@ fi
 chpwd() {
 	ls
 }
+
+# Added by Antigravity
+export PATH="/Users/tkoyama/.antigravity/antigravity/bin:$PATH"
