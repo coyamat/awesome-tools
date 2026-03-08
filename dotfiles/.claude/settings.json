@@ -23,7 +23,12 @@
       "Bash(echo *)",
       "Bash(wc *)",
       "Bash(awk *)",
-      "Bash(cut *)"
+      "Bash(cut *)",
+      "Bash(gh pr *)",
+      "Bash(cd *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git diff *)"
     ]
   }
 }
